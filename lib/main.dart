@@ -1,3 +1,4 @@
+import 'package:first_flutter_app/ui/geusters_home.dart';
 import 'package:first_flutter_app/ui/layout_home.dart';
 import 'package:first_flutter_app/ui/scaffold_home.dart';
 import 'package:first_flutter_app/ui/welcome_home.dart';
@@ -10,6 +11,7 @@ void main() {
     title: "Welcome App",
     //home: new Welcome(),
     //home: new Home(),
-    home: new HomeScaffold(),
+    //home: new HomeScaffold(),
+    home: new GeustersHome(title: "Gestures..."),
   ));
 }
