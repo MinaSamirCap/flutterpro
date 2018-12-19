@@ -22,6 +22,7 @@ class HomeScaffold extends StatelessWidget {
         actions: <Widget>[
           new IconButton(
               icon: new Icon(Icons.search),
+              tooltip: "MinaSamir",
               onPressed: () => debugPrint("Icon Tapped")),
           new IconButton(icon: new Icon(Icons.send), onPressed: _sendPressed)
         ],
@@ -50,6 +51,13 @@ class HomeScaffold extends StatelessWidget {
       ),
 
       //////////// we still have the ability to add other views
+
+      floatingActionButton: new FloatingActionButton(
+        onPressed: ()=> debugPrint("Fload pressed"),
+        backgroundColor: Colors.green,
+        child: new Icon(Icons.call_missed),
+        tooltip: "Going up!!",
+      ),
 
       bottomNavigationBar: new BottomNavigationBar(
         items: [
