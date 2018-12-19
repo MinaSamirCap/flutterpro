@@ -50,6 +50,20 @@ class HomeScaffold extends StatelessWidget {
       ),
 
       //////////// we still have the ability to add other views
+
+      bottomNavigationBar: new BottomNavigationBar(
+        items: [
+          new BottomNavigationBarItem(
+              icon: new Icon(Icons.add), title: new Text("Add")),
+          new BottomNavigationBarItem(
+              icon: new Icon(Icons.mic), title: new Text("Mic")),
+          new BottomNavigationBarItem(
+              icon: new Icon(Icons.ac_unit), title: new Text("Ice")),
+        ],
+        onTap: (int position) => debugPrint("Tabbed $position"),
+        fixedColor: Colors.deepOrange,
+        iconSize: 20,
+      ),
     );
   }
 }
