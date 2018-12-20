@@ -1,5 +1,6 @@
 import 'package:first_flutter_app/ui/geusters_home.dart';
 import 'package:first_flutter_app/ui/layout_home.dart';
+import 'package:first_flutter_app/ui/login_home.dart';
 import 'package:first_flutter_app/ui/makeitrain_home.dart';
 import 'package:first_flutter_app/ui/scaffold_home.dart';
 import 'package:first_flutter_app/ui/welcome_home.dart';
@@ -16,7 +17,11 @@ void main() {
     //home: new GeustersHome(title: "Gestures..."),
 
     //////// make it rain
-    title: "Make it rain",
-    home: new MakeItRain(),
+    //title: "Make it rain",
+    //home: new MakeItRain(),
+
+    //////// login application
+    title: "Log in",
+    home: new LoginHome(),
   ));
 }
