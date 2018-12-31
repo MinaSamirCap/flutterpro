@@ -95,7 +95,7 @@ class LoginHomeState extends State<LoginHome> {
                 )), // end of form
 
             new Padding(padding: const EdgeInsets.all(14.0)),
-            
+
             new Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
