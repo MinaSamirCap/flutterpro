@@ -4,6 +4,7 @@ import 'package:first_flutter_app/ui/layout_home_2.dart';
 import 'package:first_flutter_app/ui/login_home.dart';
 import 'package:first_flutter_app/ui/makeitrain_home.dart';
 import 'package:first_flutter_app/ui/scaffold_home.dart';
+import 'package:first_flutter_app/ui/scaffold_home_2.dart';
 import 'package:first_flutter_app/ui/welcome_home.dart';
 import 'package:flutter/material.dart';
 
@@ -13,8 +14,9 @@ void main() {
     //color: Colors.greenAccent,
     title: "Welcome App",
     //home: new Welcome(),
-    home: new HomeLayout(),
+    //home: new HomeLayout(),
     //home: new HomeScaffold(),
+    home: ScaffoldHome2()
     //home: new GeustersHome(title: "Gestures..."),
 
     //////// make it rain
