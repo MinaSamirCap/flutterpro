@@ -55,14 +55,22 @@ class ScaffoldHome2 extends StatelessWidget {
         ),
       ),
 
+      /// other properties of scaffold .. :)
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.add), title: Text("HEY")),
+          BottomNavigationBarItem(icon: Icon(Icons.add), title: Text("HEY")),
+        ],
+        onTap: (i) => debugPrint("TAB JEY $i"),
+      ),
 
       /// other properties of scaffold .. :)
-      bottomNavigationBar: BottomNavigationBar(items: [
-        BottomNavigationBarItem(icon: Icon(Icons.add), title: Text("HEY")),
-        BottomNavigationBarItem(icon: Icon(Icons.add), title: Text("HEY")),
-      ], onTap: (i)=> debugPrint("TAB JEY $i"),),
-
-      /// other properties of scaffold .. :)
+      floatingActionButton:
+          FloatingActionButton(
+              backgroundColor: Colors.amberAccent,
+              child: Icon(Icons.adb),
+              tooltip: "ADB ICON",
+              onPressed: () => debugPrint("Float Clicked")),
     );
   }
 }
