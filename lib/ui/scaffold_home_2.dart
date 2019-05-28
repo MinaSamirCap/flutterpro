@@ -22,27 +22,6 @@ class ScaffoldHome2 extends StatelessWidget {
           ),
           IconButton(
             icon: Icon(
-              Icons.send,
-              color: Colors.black,
-            ),
-            onPressed: () => debugPrint("Send Tapped!!"),
-          ),
-          IconButton(
-            icon: Icon(
-              Icons.send,
-              color: Colors.black,
-            ),
-            onPressed: () => debugPrint("Send Tapped!!"),
-          ),
-          IconButton(
-            icon: Icon(
-              Icons.send,
-              color: Colors.black,
-            ),
-            onPressed: () => debugPrint("Send Tapped!!"),
-          ),
-          IconButton(
-            icon: Icon(
               Icons.receipt,
             ),
             onPressed: _onPressed,
@@ -54,6 +33,26 @@ class ScaffoldHome2 extends StatelessWidget {
             onPressed: _onPressed,
           ),
         ],
+      ),
+
+      /// other properties of scaffold .. :)
+      backgroundColor: Colors.lightGreen.shade500,
+      body: Container(
+        alignment: Alignment.center,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text("Bonni",
+                style: TextStyle(
+                    fontSize: 14.5,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.black87)),
+            InkWell(
+              child: Text("Button!!"),
+              onTap: () => debugPrint("TABBBB!!!"),
+            )
+          ],
+        ),
       ),
     );
   }
