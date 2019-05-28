@@ -8,7 +8,7 @@ import 'package:first_flutter_app/ui/scaffold_home_2.dart';
 import 'package:first_flutter_app/ui/welcome_home.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+/*void main() {
   runApp(new MaterialApp(
     debugShowCheckedModeBanner: false,
     //color: Colors.greenAccent,
@@ -27,5 +27,5 @@ void main() {
     //title: "Log in",
     //home: new LoginHome(),
   ));
-}
+}*/
 
