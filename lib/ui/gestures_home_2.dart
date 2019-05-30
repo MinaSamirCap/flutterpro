@@ -14,12 +14,12 @@ class GesturesHome2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-        backgroundColor: Colors.black87,
-        title: Text(this.title != null ? title : "mina"),
-    ),
-    body: Center(child: CustomButton()
-    ,
-    );
+          backgroundColor: Colors.black87,
+          title: Text(this.title != null ? title : "mina"),
+        ),
+        body: Center(
+          child: CustomButton(),
+        ));
   }
 }
 
@@ -40,19 +40,17 @@ class CustomButton extends StatelessWidget {
         Scaffold.of(context).showSnackBar(snackbar);
       },
       onTap: () {
-        final snackbar = SnackBar(content: Text("MON"),
-          backgroundColor: Theme
-              .of(context)
-              .backgroundColor,
-              duration: Duration(milliseconds: 500),);
+        final snackbar = SnackBar(
+          content: Text("MON"),
+          backgroundColor: Theme.of(context).backgroundColor,
+          duration: Duration(milliseconds: 500),
+        );
         Scaffold.of(context).showSnackBar(snackbar);
       },
       child: Container(
         padding: EdgeInsets.all(8.0),
         decoration: BoxDecoration(
-          color: Theme
-              .of(context)
-              .buttonColor,
+          color: Theme.of(context).buttonColor,
           borderRadius: BorderRadius.circular(5.5),
         ),
         child: Text("First Button"),
