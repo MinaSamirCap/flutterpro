@@ -9,11 +9,31 @@ class Home extends StatefulWidget {
 
 class HomeState extends State<Home> {
   var radioValue = 0;
+  var _finalResult = 0.0;
+  var _formattedText = "";
+  final _weightController = TextEditingController();
 
   void handleRadioValueChanged(int value) {
     setState(() {
       radioValue = value;
-      print(radioValue);
+
+      switch (value) {
+        case 0:
+          _finalResult = calculateWeight(_weightController.text, 0.06);
+          _formattedText =
+              "Your Weight On Pluto is ${_finalResult.toStringAsFixed(1)}";
+          break;
+        case 1:
+          _finalResult = calculateWeight(_weightController.text, 0.38);
+          _formattedText =
+              "Your Weight On Mars is ${_finalResult.toStringAsFixed(1)}";
+          break;
+        case 2:
+          _finalResult = calculateWeight(_weightController.text, 0.91);
+          _formattedText =
+              "Your Weight On Venus is ${_finalResult.toStringAsFixed(1)}";
+          break;
+      }
     });
   }
 
@@ -42,7 +62,7 @@ class HomeState extends State<Home> {
               child: Column(
                 children: <Widget>[
                   TextField(
-                    controller: null,
+                    controller: _weightController,
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                         labelText: "Your weight on earth",
@@ -92,7 +112,9 @@ class HomeState extends State<Home> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      "Hellow .... ... ",
+                      _weightController.text.isEmpty
+                          ? "Plese Enter Your Weight"
+                          : "$_formattedText lbs",
                       style: TextStyle(
                           fontWeight: FontWeight.w900,
                           fontSize: 25.0,
@@ -106,5 +128,14 @@ class HomeState extends State<Home> {
         ),
       ),
     );
+  }
+}
+
+double calculateWeight(String weight, double multiplier) {
+  if (int.parse(weight).toString().isNotEmpty && int.parse(weight) > 0) {
+    return int.parse(weight) * multiplier;
+  } else {
+    print("Wrong!!!!");
+    return int.parse("180") * 0.38;
   }
 }
