@@ -6,8 +6,15 @@ class CustomLoginForm extends StatefulWidget {
   _CustomLoginFormState createState() => _CustomLoginFormState();
 }
 
+////// data class ...
+class _LoginData {
+  String name = "";
+  String password = "";
+}
+
 class _CustomLoginFormState extends State<CustomLoginForm> {
   final _formKey = GlobalKey<FormState>();
+  var _data = new _LoginData();
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +39,10 @@ class _CustomLoginFormState extends State<CustomLoginForm> {
                       gapPadding: 4, borderRadius: BorderRadius.circular(3.3))),
               validator: (value) {
                 if (value.isEmpty) {
+                  _data.name = "";
                   return "please enter name";
                 } else {
+                  _data.name = value;
                   debugPrint("All is Good $value");
                 }
               },
@@ -52,6 +61,7 @@ class _CustomLoginFormState extends State<CustomLoginForm> {
                 if (value.isEmpty) {
                   return "please enter password";
                 } else {
+                  _data.password = value;
                   debugPrint("all is good $value");
                 }
               },
@@ -70,10 +80,15 @@ class _CustomLoginFormState extends State<CustomLoginForm> {
                       if (_formKey.currentState.validate()) {
                         Scaffold.of(context)
                             .showSnackBar(SnackBar(content: Text("GOOOOD!!!")));
+
                       } else {
                         Scaffold.of(context).showSnackBar(
                             SnackBar(content: Text("BAAAAAAAAAD!!!")));
                       }
+
+                      setState(() {
+                        //_data.name = _data.name;
+                      });
                     },
                     child: Text("Submit"),
                   ),
@@ -83,6 +98,9 @@ class _CustomLoginFormState extends State<CustomLoginForm> {
                   child: RaisedButton(
                     onPressed: () {
                       _formKey.currentState.reset();
+                      setState(() {
+                        _data.name = "";
+                      });
                     },
                     child: Text("Clear"),
                   ),
@@ -93,7 +111,16 @@ class _CustomLoginFormState extends State<CustomLoginForm> {
 
           Padding(
             padding: const EdgeInsets.all(12.0),
-            child: Center(child: Text("Hello There")),
+            child: Center(
+                child: _data.name.isEmpty
+                    ? Text("")
+                    : Text(
+                        "Hello, ${_data.name}",
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      )),
           )
         ],
       ),
