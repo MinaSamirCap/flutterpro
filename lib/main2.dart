@@ -1,6 +1,7 @@
 import 'package:first_flutter_app/ui/CustomLoginForm.dart';
 import 'package:first_flutter_app/ui/gestures_home_2.dart';
 import 'package:first_flutter_app/ui/make_it_rain_home_2.dart';
+import 'package:first_flutter_app/ui/weight_on_plant_x.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +14,7 @@ import 'package:flutter/material.dart';
   ));
 }*/
 
-void main() => runApp(Login2());
+//void main() => runApp(Login2());
 
 class Login2 extends StatelessWidget {
   final appTitle = "login";
@@ -32,4 +33,12 @@ class Login2 extends StatelessWidget {
       ),
     );
   }
+}
+
+/////////// plants
+void main(){
+  runApp(MaterialApp(
+    title: "Weight on plant X",
+    home: Home(),
+  ));
 }
