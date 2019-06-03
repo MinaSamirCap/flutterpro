@@ -1,4 +1,5 @@
 import 'package:first_flutter_app/ui/CustomLoginForm.dart';
+import 'package:first_flutter_app/ui/bmi_home.dart';
 import 'package:first_flutter_app/ui/gestures_home_2.dart';
 import 'package:first_flutter_app/ui/make_it_rain_home_2.dart';
 import 'package:first_flutter_app/ui/weight_on_plant_x.dart';
@@ -36,9 +37,18 @@ class Login2 extends StatelessWidget {
 }
 
 /////////// plants
-void main(){
+/*void main(){
   runApp(MaterialApp(
     title: "Weight on plant X",
     home: Home(),
+  ));
+}*/
+
+///////// BMI -> Body Mass Index
+void main() {
+  runApp(MaterialApp(
+    title: "BMI",
+    theme: ThemeData(buttonColor: Colors.redAccent),
+    home: BMIHome(),
   ));
 }
