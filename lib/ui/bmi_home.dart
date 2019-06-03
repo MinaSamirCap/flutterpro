@@ -115,15 +115,18 @@ class BMIHomeState extends State<BMIHome> {
                           hintText: "In lb",
                           icon: Icon(Icons.drag_handle)),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: RaisedButton(
-                        color: Colors.redAccent,
-                        onPressed: () {
-                          _calculateBMI();
-                        },
-                        textColor: Colors.white,
-                        child: Text("Calculate"),
+                    Container(
+                      alignment: Alignment.center,
+                      child: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: RaisedButton(
+                          color: Colors.redAccent,
+                          onPressed: () {
+                            _calculateBMI();
+                          },
+                          textColor: Colors.white,
+                          child: Text("Calculate"),
+                        ),
                       ),
                     )
                   ],
