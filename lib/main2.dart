@@ -5,6 +5,7 @@ import 'package:first_flutter_app/ui/make_it_rain_home_2.dart';
 import 'package:first_flutter_app/ui/weight_on_plant_x.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 /*void main() {
   runApp(MaterialApp(
@@ -45,10 +46,33 @@ class Login2 extends StatelessWidget {
 }*/
 
 ///////// BMI -> Body Mass Index
-void main() {
+/*void main() {
   runApp(MaterialApp(
     title: "BMI",
     theme: ThemeData(buttonColor: Colors.redAccent),
     home: BMIHome(),
   ));
+}*/
+
+////////// connect to internet ...
+//https://jsonplaceholder.typicode.com/posts
+void main() async {
+
+  String _data = await getJSON();
+  print(_data);
+
+  runApp(MaterialApp(
+    home: Scaffold(
+      appBar: AppBar(
+        title: Text("JSON Parse"),
+        backgroundColor: Colors.blueGrey,
+      ),
+    ),
+  ));
+}
+
+Future<String> getJSON() async {
+  var apiUrl = "https://jsonplaceholder.typicode.com/posts";
+  http.Response response = await http.get(apiUrl);
+  return response.body;
 }
