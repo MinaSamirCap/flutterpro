@@ -60,10 +60,19 @@ class Login2 extends StatelessWidget {
 //https://jsonplaceholder.typicode.com/posts
 void main() async {
   List _data = await getJSON();
-  print(_data[0]);
+  //print(_data[0]);
 
-  for (var i = 0; i < _data.length; i++) {
+  /*for (var i = 0; i < _data.length; i++) {
     print("TITLE: ${_data[i]["title"]}");
+  }*/
+
+  List _usersData = await getUsers();
+  for (var z = 0; z < _usersData.length; z++) {
+    var address = _usersData[z]["address"];
+    print(
+        "UserName: ${_usersData[z]["username"]} /Email: ${_usersData[z]["email"]} "
+        "/Address: ${_usersData[z]["address"]["street"]} ,st.. postalcode: ${_usersData[z]["address"]["zipcode"]}"
+        "/GEO: ${address["geo"]["lat"]}, ${address["geo"]["lng"]}");
   }
 
   runApp(MaterialApp(
@@ -125,6 +134,12 @@ void showTapMessage(BuildContext context, int position, data) {
 
 Future<List> getJSON() async {
   var apiUrl = "https://jsonplaceholder.typicode.com/posts";
+  http.Response response = await http.get(apiUrl);
+  return json.decode(response.body);
+}
+
+Future<List> getUsers() async {
+  var apiUrl = "https://jsonplaceholder.typicode.com/users";
   http.Response response = await http.get(apiUrl);
   return json.decode(response.body);
 }
