@@ -91,7 +91,8 @@ class QuakesAppState extends State<QuakesApp> {
 
   itemTapped(BuildContext context, int position) {
     var alertDialog = AlertDialog(
-      title: Text("${_data[position]["properties"]["place"]}"),
+      title: Text("Quakes"),
+      content: Text("${_data[position]["properties"]["place"]}"),
       actions: <Widget>[
         FlatButton(
           onPressed: () {
