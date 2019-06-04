@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:first_flutter_app/ui/CustomLoginForm.dart';
 import 'package:first_flutter_app/ui/bmi_home.dart';
 import 'package:first_flutter_app/ui/gestures_home_2.dart';
@@ -57,22 +59,72 @@ class Login2 extends StatelessWidget {
 ////////// connect to internet ...
 //https://jsonplaceholder.typicode.com/posts
 void main() async {
+  List _data = await getJSON();
+  print(_data[0]);
 
-  String _data = await getJSON();
-  print(_data);
+  for (var i = 0; i < _data.length; i++) {
+    print("TITLE: ${_data[i]["title"]}");
+  }
 
   runApp(MaterialApp(
     home: Scaffold(
-      appBar: AppBar(
-        title: Text("JSON Parse"),
-        backgroundColor: Colors.blueGrey,
-      ),
-    ),
+        appBar: AppBar(
+          title: Text("JSON Parse"),
+          backgroundColor: Colors.blueGrey,
+        ),
+        body: ListView.builder(
+            itemCount: _data.length,
+            itemBuilder: (BuildContext context, int position) {
+              return Column(children: <Widget>[
+                Divider(
+                  height: 1,
+                ),
+                ListTile(
+                  title: Text(
+                    "${_data[position]["title"]}",
+                    style: TextStyle(
+                        color: Colors.blueGrey, fontWeight: FontWeight.w900),
+                  ),
+                  subtitle: Text("${_data[position]["body"]}"),
+                  leading: CircleAvatar(
+                    backgroundColor: Colors.blue,
+                    child: Text(
+                      "${_data[position]["title"].toString()[0].toUpperCase()}",
+                      style: TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.w900),
+                    ),
+                  ),
+                  onTap: () =>
+                      showTapMessage(context, position, _data[position]),
+                )
+              ]);
+            })),
   ));
 }
 
-Future<String> getJSON() async {
+void showTapMessage(BuildContext context, int position, data) {
+  var alertDialog = new AlertDialog(
+    title: Text("HELLO"),
+    actions: <Widget>[
+      FlatButton(
+        onPressed: () {
+          Scaffold.of(context)
+              .showSnackBar(SnackBar(content: Text("${data["title"]}")));
+          Navigator.of(context).pop();
+        },
+        child: Text("Ok"),
+      )
+    ],
+  );
+  showDialog(
+      context: context,
+      builder: (context) {
+        return alertDialog;
+      });
+}
+
+Future<List> getJSON() async {
   var apiUrl = "https://jsonplaceholder.typicode.com/posts";
   http.Response response = await http.get(apiUrl);
-  return response.body;
+  return json.decode(response.body);
 }
