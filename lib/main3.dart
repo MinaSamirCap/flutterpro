@@ -1,3 +1,4 @@
+import 'package:first_flutter_app/ui/ab_screens.dart';
 import 'package:first_flutter_app/ui/klimatic_app.dart';
 import 'package:first_flutter_app/ui/quakes_app.dart';
 import 'package:flutter/material.dart';
@@ -9,10 +10,9 @@ import 'package:flutter/material.dart';
 }*/
 
 //////// Klimatic weather application
-void main(){
-  runApp(
-    MaterialApp(
-      home: Klimatic(),
-    )
-  );
+void main() {
+  runApp(MaterialApp(
+    //home: Klimatic(),
+    home: ScreenA(),
+  ));
 }
