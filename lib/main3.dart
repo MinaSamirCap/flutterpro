@@ -12,7 +12,7 @@ import 'package:flutter/material.dart';
 //////// Klimatic weather application
 void main() {
   runApp(MaterialApp(
-    //home: Klimatic(),
-    home: ScreenA(),
+    home: Klimatic(),
+    //home: ScreenA(),
   ));
 }

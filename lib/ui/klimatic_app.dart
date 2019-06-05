@@ -11,10 +11,12 @@ class Klimatic extends StatefulWidget {
 }
 
 class _KlimaticState extends State<Klimatic> {
-  void showStuff() async {
+  var cityName = util.defaultCity;
+
+  /*void showStuff() async {
     Map data = await getWeather(util.appId2, "Cairo");
     print(data);
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +33,7 @@ class _KlimaticState extends State<Klimatic> {
               Icons.menu,
               color: Colors.red,
             ),
-            onPressed: () => showStuff(),
+            onPressed: () => selectCity(context),
           )
         ],
       ),
@@ -47,7 +49,7 @@ class _KlimaticState extends State<Klimatic> {
             alignment: Alignment.topRight,
             margin: const EdgeInsetsDirectional.fromSTEB(0, 10, 20, 0),
             child: Text(
-              "Spokane!!",
+              "$cityName!!",
               style: cityStyle(),
             ),
           ),
@@ -59,7 +61,7 @@ class _KlimaticState extends State<Klimatic> {
           ////// weather data
           Container(
             margin: const EdgeInsetsDirectional.fromSTEB(30, 320, 0, 0),
-            child: updateWeatherWidget("San+Fransisco"),
+            child: updateWeatherWidget(cityName),
           )
         ],
       ),
@@ -80,15 +82,20 @@ class _KlimaticState extends State<Klimatic> {
         // here we will get all the data from JSON .. api ..
         // draw the widget .. in both cases if snapshot is empty or not
         if (snapshot.hasData) {
-          Map content = snapshot.data;
+          Map content = snapshot.data["main"];
           return Container(
             child: Column(
               children: <Widget>[
                 ListTile(
                   title: Text(
-                    "${content["main"]["temp"]}",
+                    "${content["temp"]}",
                     style: tempStyle(),
                   ),
+                ),
+                ListTile(
+                  title: Text("Humidity: ${content["humidity"]} \n"
+                      "Min Temp: ${content["temp_min"]} \n"
+                      "Max Temp: ${content["temp_max"]}", style: tempStyle2(),),
                 )
               ],
             ),
@@ -103,6 +110,18 @@ class _KlimaticState extends State<Klimatic> {
         }
       },
     );
+  }
+
+  Future selectCity(BuildContext context) async {
+    Map result = await Navigator.of(context)
+        .push(MaterialPageRoute<Map>(builder: (BuildContext context) {
+      return ChangeCity();
+    }));
+
+    if (result != null && result.containsKey("enter")) {
+      cityName = result["enter"];
+      //setState(() {});
+    } else {}
   }
 }
 
@@ -120,4 +139,63 @@ tempStyle() {
       fontWeight: FontWeight.w900,
       fontStyle: FontStyle.normal,
       fontSize: 25);
+}
+
+tempStyle2() {
+  return TextStyle(
+      color: Colors.white,
+      fontWeight: FontWeight.w200,
+      fontStyle: FontStyle.normal,
+      fontSize: 15);
+}
+
+class ChangeCity extends StatelessWidget {
+  var _cityTextController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "Change City",
+          style: TextStyle(color: Colors.black),
+        ),
+        backgroundColor: Colors.white,
+        iconTheme: IconThemeData(
+          color: Colors.black, //change your color here
+        ),
+      ),
+      body: Stack(
+        children: <Widget>[
+          SizedBox.expand(
+            child: Image.asset(
+              "images/white_snow.png",
+              fit: BoxFit.fill,
+            ),
+          ),
+          ListView(
+            children: <Widget>[
+              ListTile(
+                title: TextField(
+                  controller: _cityTextController,
+                  keyboardType: TextInputType.text,
+                  decoration: InputDecoration(
+                      labelText: "Enter city", hintText: "ex: cairo"),
+                ),
+              ),
+              ListTile(
+                title: RaisedButton(
+                    color: Colors.red,
+                    child: Text("Get Temp"),
+                    onPressed: () {
+                      Navigator.pop(
+                          context, {"enter": _cityTextController.text});
+                    }),
+              )
+            ],
+          )
+        ],
+      ),
+    );
+  }
 }
