@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class IOHome extends StatefulWidget {
   @override
@@ -9,7 +10,28 @@ class IOHome extends StatefulWidget {
 }
 
 class _IOHomeState extends State<IOHome> {
+  final DATA_KEY = "dataKey";
   var _enterDataField = TextEditingController();
+  var _saveData = "";
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSavedData();
+  }
+
+  void _loadSavedData() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    setState(() {
+      _saveData = preferences.get(DATA_KEY);
+      print(_saveData);
+    });
+  }
+
+  void _saveDataTo(String text) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setString(DATA_KEY, text);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +43,7 @@ class _IOHomeState extends State<IOHome> {
       body: new Container(
         padding: const EdgeInsets.all(15.0),
         alignment: Alignment.topCenter,
-        child: Column(
+        child: ListView(
           children: <Widget>[
             ListTile(
               title: TextField(
@@ -43,7 +65,26 @@ class _IOHomeState extends State<IOHome> {
                     readFile();
                   },
                   child: Text("Read from file")),
-            )
+            ),
+            ListTile(
+              title: FlatButton(
+                  onPressed: () {
+                    // save data
+                    _saveDataTo(_enterDataField.text);
+                  },
+                  child: Text("Write to sharepreference ...")),
+            ),
+            ListTile(
+              title: (_saveData == null || _saveData.isEmpty)
+                  ? Text("NO DATA")
+                  : Text("$_saveData"),
+              subtitle: FlatButton(
+                  onPressed: () {
+                    // save data
+                    setState(() {});
+                  },
+                  child: Text("Read from sharepreference ...")),
+            ),
           ],
         ),
       ),
@@ -84,4 +125,12 @@ class _IOHomeState extends State<IOHome> {
           return snapshot != null ? Text("${snapshot.data}") : Text("Loadeing");
         });
   }
+
+/*Widget readFromShared() {
+    return FutureBuilder(
+        future: _loadSavedData(),
+        builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+          return snapshot != null ? Text("${snapshot.data}") : Text("Loadeing");
+        });
+  }*/
 }
