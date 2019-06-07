@@ -1,3 +1,4 @@
+import 'package:first_flutter_app/read_write/database_home.dart';
 import 'package:first_flutter_app/read_write/io_home.dart';
 import 'package:first_flutter_app/ui/ab_screens.dart';
 import 'package:first_flutter_app/ui/klimatic_app.dart';
@@ -15,6 +16,7 @@ void main() {
   runApp(MaterialApp(
     //home: Klimatic(),
     //home: ScreenA(),
-    home: IOHome(),
+    //home: IOHome(),
+    home: DatabaseHome(),
   ));
 }
