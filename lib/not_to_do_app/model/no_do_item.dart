@@ -7,6 +7,10 @@ class NoDoItem extends StatelessWidget {
 
   NoDoItem(this._itemName, this._dateCreated);
 
+  set itemName(String value) {
+    _itemName = value;
+  }
+
   String get itemName => _itemName;
 
   String get dateCreated => _dateCreated;
@@ -40,20 +44,27 @@ class NoDoItem extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(
-            _itemName,
-            style: TextStyle(
-                color: Colors.white, fontSize: 17, fontWeight: FontWeight.w500),
-          ),
-          Container(
-            margin: const EdgeInsetsDirectional.only(top: 5),
-            child: Text(
-              "Created At: $_dateCreated",
-              style: TextStyle(
-                  color: Colors.white70,
-                  fontSize: 13.5,
-                  fontStyle: FontStyle.italic),
-            ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                _itemName,
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 17,
+                    fontWeight: FontWeight.w500),
+              ),
+              Container(
+                margin: const EdgeInsetsDirectional.only(top: 5),
+                child: Text(
+                  "Created At: $_dateCreated",
+                  style: TextStyle(
+                      color: Colors.white70,
+                      fontSize: 13.5,
+                      fontStyle: FontStyle.italic),
+                ),
+              )
+            ],
           )
         ],
       ),
