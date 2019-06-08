@@ -15,6 +15,11 @@ class User {
   String get password => _password;
   String get username => _username;
 
+
+  set username(String value) {
+    _username = value;
+  }
+
   Map<String, dynamic> toMap() {
     Map map = Map<String, dynamic>();
     map["username"] = this._username;
