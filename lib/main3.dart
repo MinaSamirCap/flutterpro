@@ -5,6 +5,7 @@ import 'package:first_flutter_app/ui/klimatic_app.dart';
 import 'package:first_flutter_app/ui/quakes_app.dart';
 import 'package:flutter/material.dart';
 
+import 'firebase/firebase_home.dart';
 import 'not_to_do_app/ui/no_to_do.dart';
 
 /*void main() {
@@ -14,6 +15,7 @@ import 'not_to_do_app/ui/no_to_do.dart';
 }*/
 
 //////// Klimatic weather application
+/*
 void main() {
   runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -23,3 +25,7 @@ void main() {
       //home: DatabaseHome(),
       home: NoToDoHome()));
 }
+*/
+
+/////////////// firebase ...
+void main() => runApp(MyApp());
