@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_database/firebase_database.dart';
 
+final FirebaseDatabase _database = FirebaseDatabase.instance;
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -39,21 +41,21 @@ class _MyHomePageState extends State<MyHomePage> {
   void _incrementCounter() {
     setState(() {
       _counter++;
+      _database
+          .reference()
+          .child("message")
+          .set({"firestname": "mina", "counter": "$_counter"});
     });
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
-
         title: Text(widget.title),
       ),
       body: Center(
-
         child: Column(
-
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
