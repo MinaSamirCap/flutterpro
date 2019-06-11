@@ -41,10 +41,22 @@ class _MyHomePageState extends State<MyHomePage> {
   void _incrementCounter() {
     setState(() {
       _counter++;
+
+      /// to write to firebase database ...
       _database
           .reference()
           .child("message")
           .set({"firestname": "mina", "counter": "$_counter"});
+
+      /// to read from firebase database ...
+      _database
+          .reference()
+          .child("message2")
+          .once()
+          .then((DataSnapshot snapshot) {
+        Map<dynamic, dynamic> data = snapshot.value;
+        print("firebase data: $data");
+      });
     });
   }
 
