@@ -1,3 +1,4 @@
+import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 
@@ -40,29 +41,8 @@ class _MyHomePageState extends State<MyHomePage> {
     board = Board("", "");
     databaseReference = _database.reference().child("community_board");
     databaseReference.onChildAdded.listen(_onEntryAdded);
+    databaseReference.onChildChanged.listen(_onEntryChanged);
   }
-
-  /*void _incrementCounter() {
-    setState(() {
-      _counter++;
-
-      /// to write to firebase database ...
-      _database
-          .reference()
-          .child("message")
-          .set({"firestname": "mina", "counter": "$_counter"});
-
-      /// to read from firebase database ...
-      _database
-          .reference()
-          .child("message2")
-          .once()
-          .then((DataSnapshot snapshot) {
-        Map<dynamic, dynamic> data = snapshot.value;
-        print("firebase data: $data");
-      });
-    });
-  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -106,9 +86,26 @@ class _MyHomePageState extends State<MyHomePage> {
                     onPressed: () {
                       handle_submit();
                     },
-                  )
+                  ),
                 ],
               ),
+            ),
+          ),
+          Flexible(
+            child: FirebaseAnimatedList(
+              query: databaseReference,
+              itemBuilder: (_, DataSnapshot snapshot,
+                  Animation<double> animation, int index) {
+                return Card(
+                  child: ListTile(
+                    leading: CircleAvatar(
+                      backgroundColor: Colors.orange,
+                    ),
+                    title: Text(boardMessages[index].subject),
+                    subtitle: Text(boardMessages[index].body),
+                  ),
+                );
+              },
             ),
           )
         ],
@@ -120,6 +117,17 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       boardMessages.add(Board.fromSnapshot(event.snapshot));
     });
+  }
+
+  void _onEntryChanged(Event event) {
+    var oldEntry = boardMessages.singleWhere((entry) {
+      return entry.key == event.snapshot.key;
+    });
+
+    boardMessages[boardMessages.indexOf(oldEntry)] =
+        Board.fromSnapshot(event.snapshot);
+
+    setState(() {});
   }
 
   void handle_submit() {
