@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 
-final FirebaseDatabase _database = FirebaseDatabase.instance;
+import 'model/board.dart';
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -27,7 +27,20 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  List<Board> boardMessages = List();
+  Board board;
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final FirebaseDatabase _database = FirebaseDatabase.instance;
+  DatabaseReference databaseReference;
+
+  @override
+  void initState() {
+    super.initState();
+
+    board = Board("", "");
+    databaseReference = _database.reference().child("community_board");
+    databaseReference.onChildAdded.listen(_onEntryAdded);
+  }
 
   /*void _incrementCounter() {
     setState(() {
@@ -57,6 +70,67 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
+      body: Column(
+        children: <Widget>[
+          Flexible(
+            flex: 0,
+            child: Form(
+              key: formKey,
+              child: Flex(
+                direction: Axis.vertical,
+                children: <Widget>[
+                  ListTile(
+                    leading: Icon(Icons.subject),
+                    title: TextFormField(
+                      initialValue: "",
+                      onSaved: (val) => board.subject = val,
+                      validator: (val) => val.isEmpty
+                          ? "please add data"
+                          : null /* means no need for more validation ...*/,
+                    ),
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.message),
+                    title: TextFormField(
+                      initialValue: "",
+                      onSaved: (val) => board.body = val,
+                      validator: (val) =>
+                          val.isEmpty ? "please add data" : null,
+                    ),
+                  ),
+
+                  //////// send or post button
+                  FlatButton(
+                    child: Text("Post"),
+                    color: Colors.redAccent,
+                    onPressed: () {
+                      handle_submit();
+                    },
+                  )
+                ],
+              ),
+            ),
+          )
+        ],
+      ),
     );
+  }
+
+  void _onEntryAdded(Event event) {
+    setState(() {
+      boardMessages.add(Board.fromSnapshot(event.snapshot));
+    });
+  }
+
+  void handle_submit() {
+    final FormState state = formKey.currentState;
+    if (state.validate()) {
+      state.save();
+      state.reset();
+
+      // save form data to databae
+      print(board.toJson());
+      databaseReference.push().set(board.toJson());
+    }
   }
 }
