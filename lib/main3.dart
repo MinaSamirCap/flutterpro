@@ -5,6 +5,7 @@ import 'package:first_flutter_app/ui/klimatic_app.dart';
 import 'package:first_flutter_app/ui/quakes_app.dart';
 import 'package:flutter/material.dart';
 
+import 'animation/anim_app.dart';
 import 'auth/auth_home.dart';
 import 'firebase/firebase_home.dart';
 import 'not_to_do_app/ui/no_to_do.dart';
@@ -32,4 +33,8 @@ void main() {
 //void main() => runApp(MyApp());
 
 ////////////// auth .. google singin ,firebase .....fina
-void main() => runApp(AuthApp());
+//void main() => runApp(AuthApp());
+
+
+////////////// flutter animation lesson 31 ..
+void main() => runApp(AnimationApp());
