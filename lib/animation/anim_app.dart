@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'counter_anim.dart';
+
 class AnimationApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -50,11 +52,18 @@ class _AnimationHomeState extends State<AnimationHome>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text(
-          "Hello World!!",
-          style: TextStyle(fontSize: 19.0 * animation.value),
-        ),
+      body: Padding(
+        padding: const EdgeInsets.all(100.0),
+        child: Center(
+            child: Column(
+          children: <Widget>[
+            Text(
+              "Hello World!!",
+              style: TextStyle(fontSize: 19.0 * animation.value),
+            ),
+            Center(child: CounterAnimation())
+          ],
+        )),
       ),
     );
   }

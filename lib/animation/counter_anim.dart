@@ -8,11 +8,24 @@ class CounterAnimation extends StatefulWidget {
 class _CounterAnimationState extends State<CounterAnimation>
     with SingleTickerProviderStateMixin {
   AnimationController _controller;
+  Animation<double> animation;
+
+  int counter = 0;
 
   @override
   void initState() {
-    _controller = AnimationController(vsync: this);
     super.initState();
+
+    _controller =
+        AnimationController(duration: Duration(seconds: 3), vsync: this);
+    animation = CurvedAnimation(parent: _controller, curve: Curves.easeIn);
+
+    _controller.addListener(() {
+      this.setState(() {
+        counter++;
+        print("Print: $counter");
+      });
+    });
   }
 
   @override
@@ -23,6 +36,14 @@ class _CounterAnimationState extends State<CounterAnimation>
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return GestureDetector(
+      child: Text(
+        _controller.isAnimating ? counter.toStringAsFixed(2) : "Let's begin",
+        style: TextStyle(
+            fontSize:
+                _controller.isAnimating ? 24.0 * _controller.value : 20.0),
+      ),
+      onTap: () => _controller.forward(),
+    );
   }
 }
