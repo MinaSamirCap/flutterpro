@@ -53,7 +53,7 @@ class _AnimationHomeState extends State<AnimationHome>
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(100.0),
+        padding: const EdgeInsets.all(8.0),
         child: Center(
             child: Column(
           children: <Widget>[

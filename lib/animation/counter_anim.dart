@@ -18,12 +18,26 @@ class _CounterAnimationState extends State<CounterAnimation>
 
     _controller =
         AnimationController(duration: Duration(seconds: 3), vsync: this);
-    animation = CurvedAnimation(parent: _controller, curve: Curves.easeIn);
+    //animation = CurvedAnimation(parent: _controller, curve: Curves.easeIn);
+    animation = Tween(begin: 0.0, end: 10.0).animate(_controller)
+      ..addListener(() {
+        //print("Animation Tween: ${animation.value}");
+      })
+      ..addStatusListener((status) {
+        if (status == AnimationStatus.completed) {
+          _controller.reverse(from: 5);
+        } else if (status == AnimationStatus.reverse) {
+          this.setState(() {
+            counter = counter - 400;
+            print("=============> reverse value =======> $counter");
+          });
+        }
+      });
 
     _controller.addListener(() {
       this.setState(() {
         counter++;
-        print("Print: $counter");
+        //print("Print: $counter");
       });
     });
   }
@@ -40,10 +54,14 @@ class _CounterAnimationState extends State<CounterAnimation>
       child: Text(
         _controller.isAnimating ? counter.toStringAsFixed(2) : "Let's begin",
         style: TextStyle(
-            fontSize:
-                _controller.isAnimating ? 24.0 * _controller.value : 20.0),
+            fontSize: _controller.isAnimating ? 24.0 * animation.value : 20.0),
       ),
-      onTap: () => _controller.forward(),
+      onTap: () => {startAnimation()},
     );
+  }
+
+  startAnimation() {
+    print("TAPPED");
+    _controller.forward();
   }
 }
