@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'animation/anim_app.dart';
 import 'animation/chain_anim_app.dart';
 import 'auth/auth_home.dart';
+import 'company_profile_app/ui/company_app.dart';
 import 'firebase/firebase_home.dart';
 import 'not_to_do_app/ui/no_to_do.dart';
 
@@ -39,4 +40,7 @@ void main() {
 
 ////////////// flutter animation lesson 31 ..
 //void main() => runApp(AnimationApp());
-void main() => runApp(ChainAnimApp());
+//void main() => runApp(ChainAnimApp());
+
+///////////// flutter animation company app lesson 31 ..
+void main() => runApp(CompanyApp());

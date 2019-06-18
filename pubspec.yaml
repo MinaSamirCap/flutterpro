@@ -54,6 +54,12 @@ flutter:
    - images/light_rain.png
    - images/umbrella.png
    - images/white_snow.png
+   - assets/logo.jpg
+   - assets/android.jpg
+   - assets/angular.jpg
+   - assets/flutter.jpg
+   - assets/java.jpg
+   - assets/kotlin.png
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
