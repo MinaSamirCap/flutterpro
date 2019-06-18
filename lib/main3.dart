@@ -6,6 +6,7 @@ import 'package:first_flutter_app/ui/quakes_app.dart';
 import 'package:flutter/material.dart';
 
 import 'animation/anim_app.dart';
+import 'animation/chain_anim_app.dart';
 import 'auth/auth_home.dart';
 import 'firebase/firebase_home.dart';
 import 'not_to_do_app/ui/no_to_do.dart';
@@ -37,4 +38,5 @@ void main() {
 
 
 ////////////// flutter animation lesson 31 ..
-void main() => runApp(AnimationApp());
+//void main() => runApp(AnimationApp());
+void main() => runApp(ChainAnimApp());
