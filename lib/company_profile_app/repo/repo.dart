@@ -12,12 +12,12 @@ class RepoData {
           title: 'The Complete Android & Java Bootcamp',
           thumbnail: 'assets/android.jpg',
           url:
-              'https://www.udemy.com/the-complete-android-bootcamp-course-material-design-uiux/?couponCode=BAWP-SITE-COURSE-15'),
+              'https://www.udemy.com/'),
       new CourseModel(
           title: 'Kotlin Android Development Masterclass',
           thumbnail: 'assets/kotlin.png',
           url:
-              'https://www.udemy.com/kotlin-android-developer-masterclass/?couponCode=BAWP-SITE-COURSES-15'),
+              'https://www.udemy.com/'),
       new CourseModel(
           title: 'Java Design Patterns',
           thumbnail: 'assets/java.jpg',

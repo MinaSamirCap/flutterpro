@@ -4,6 +4,7 @@ import 'package:first_flutter_app/company_profile_app/model/company_model.dart';
 import 'package:flutter/material.dart';
 
 import 'company_details_intro_animation.dart';
+import 'course_card.dart';
 
 class CompanyDetailsPage extends StatelessWidget {
   /// because we have a final variables that in need to be initialized so
@@ -53,7 +54,11 @@ class CompanyDetailsPage extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[_createLogoAvatar(), _createAboutCompany()],
+        children: <Widget>[
+          _createLogoAvatar(),
+          _createAboutCompany(),
+          _createCourseScroller()
+        ],
       ),
     );
   }
@@ -127,6 +132,27 @@ class CompanyDetailsPage extends StatelessWidget {
                 height: 1.4),
           )
         ],
+      ),
+    );
+  }
+
+  Widget _createCourseScroller() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 14.0),
+      child: Transform(
+        transform: Matrix4.translationValues(
+            animation.courseScrollerXTranslation.value, 0.0, 0.0),
+        child: SizedBox.fromSize(
+          size: Size.fromHeight(250.0),
+          child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              padding: const EdgeInsets.symmetric(horizontal: 7.0),
+              itemCount: company.courses.length,
+              itemBuilder: (BuildContext context, int index) {
+                var course = company.courses[index];
+                return CourseCard(course: course);
+              }),
+        ),
       ),
     );
   }
