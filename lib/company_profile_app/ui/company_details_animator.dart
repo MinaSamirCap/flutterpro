@@ -16,7 +16,7 @@ class _CompanyDetailsAnimatorState extends State<CompanyDetailsAnimator>
   void initState() {
     super.initState();
     _controller = AnimationController(
-        duration: const Duration(milliseconds: 1780), vsync: this);
+        duration: const Duration(milliseconds: 8000), vsync: this);
 
     _controller.forward();
   }
