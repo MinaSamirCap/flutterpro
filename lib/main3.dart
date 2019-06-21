@@ -10,6 +10,7 @@ import 'animation/chain_anim_app.dart';
 import 'auth/auth_home.dart';
 import 'company_profile_app/ui/company_app.dart';
 import 'firebase/firebase_home.dart';
+import 'jokes_app/ui/jokes_app.dart';
 import 'not_to_do_app/ui/no_to_do.dart';
 
 /*void main() {
@@ -43,4 +44,7 @@ void main() {
 //void main() => runApp(ChainAnimApp());
 
 ///////////// flutter animation company app lesson 31 ..
-void main() => runApp(CompanyApp());
+//void main() => runApp(CompanyApp());
+
+/// orientation application ...
+void main() => runApp(JokesApp());
